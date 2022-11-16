@@ -15,6 +15,11 @@ export class UserController {
     return this.userService.findOne(id)
   }
 
+  @Get()
+  findByEmail(@Body() email: string) {
+    return this.userService.findByEmail(email)
+  }
+
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.userService.remove(id)
