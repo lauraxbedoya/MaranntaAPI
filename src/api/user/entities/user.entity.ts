@@ -23,10 +23,10 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   public address: string | null;
-  
+
   @Column({ name: 'date_of_birth', nullable: true })
   public dateOfBirth: Date | null;
 
-  @Column()
+  @Column({ name: 'is_admin' })
   public isAdmin: boolean;
 }

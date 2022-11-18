@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 
 @Controller('api/users')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   @Get()
   findAll() {
