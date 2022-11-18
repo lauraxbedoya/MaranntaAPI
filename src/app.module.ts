@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Stock } from './api/stock/entities/stock.entity';
+import { StockModule } from './api/stock/stock.module';
 import { AuthModule } from './api/user/auth/auth.module';
 import { User } from './api/user/entities/user.entity';
 import { UsersModule } from './api/user/user.module';
@@ -17,11 +19,12 @@ import { AppService } from './app.service';
       username: 'postgres',
       password: 'postgres',
       database: 'marannta_api',
-      entities: [User],
+      entities: [User, Stock],
       synchronize: true,
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    StockModule
   ],
 })
-export class AppModule {}
+export class AppModule { }
