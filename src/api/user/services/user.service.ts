@@ -8,7 +8,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepo: Repository<User>,
-  ) {}
+  ) { }
 
   findAll() {
     return this.usersRepo.find();
@@ -27,7 +27,7 @@ export class UserService {
   }
 
   create(body: any) {
-    
+
     // user.name = body.name;
     // user.lastname = body.lastname;
     // user.email = body.email;
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   async update(id: number, body: any) {
-    const user = await this.usersRepo.findOneBy({id});
+    const user = await this.usersRepo.findOneBy({ id });
     this.usersRepo.merge(user, body);
     return this.usersRepo.save(user);
   }

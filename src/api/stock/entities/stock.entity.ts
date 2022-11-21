@@ -1,5 +1,6 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Sizes } from '../stock.enum';
+import { StockImage } from './stock_image.entity';
 
 @Entity('stock')
 export class Stock extends BaseEntity {
@@ -34,4 +35,7 @@ export class Stock extends BaseEntity {
 
   @CreateDateColumn({ nullable: true })
   createdDate: Date;
+
+  @OneToMany(() => StockImage, (image) => image.stock)
+  stockImages: StockImage
 }
