@@ -10,6 +10,8 @@ import { User } from './api/user/entities/user.entity';
 import { UsersModule } from './api/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ContactsModule } from './api/contacts/contacts.module';
+import { Contact } from './api/contacts/entities/contacts.entity';
 
 @Module({
   controllers: [AppController],
@@ -22,13 +24,14 @@ import { AppService } from './app.service';
       username: 'postgres',
       password: 'postgres',
       database: 'marannta_api',
-      entities: [User, Stock, StockImage, Order],
+      entities: [User, Stock, StockImage, Order, Contact],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     StockModule,
     OrderModule,
+    ContactsModule
   ],
 })
 export class AppModule { }
