@@ -34,4 +34,9 @@ export class UserController {
   update(@Param('id') id: number, @Body() body: any) {
     return this.userService.update(id, body)
   }
+
+  @Post()
+  addUser(@Body() body: any) {
+    return this.userService.createOrder(body)
+  }
 }

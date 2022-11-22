@@ -1,5 +1,6 @@
+import { Order } from 'src/api/order/entities/order.entity';
 import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Sizes } from '../stock.enum';
+import { Categories, Sizes } from '../stock.enum';
 import { StockImage } from './stock_image.entity';
 
 @Entity('stock')
@@ -33,9 +34,15 @@ export class Stock extends BaseEntity {
   @Column()
   public price: number;
 
+  @Column({ type: 'enum', enum: Categories, default: Categories.Otros })
+  public categories: Categories;
+
   @CreateDateColumn({ nullable: true })
   createdDate: Date;
 
   @OneToMany(() => StockImage, (image) => image.stock)
-  stockImages: StockImage
+  stockImages: StockImage[]
+
+  @OneToMany(() => Order, (order) => order.stock)
+  orders: Order[]
 }

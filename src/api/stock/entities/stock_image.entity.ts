@@ -11,6 +11,6 @@ export class StockImage {
   public url: string
 
   @ManyToOne(() => Stock, (stock) => stock.stockImages)
-  @JoinColumn({ name: 'stock_id' })
+  @JoinColumn({ name: 'stockId' })
   stock: Stock
 }

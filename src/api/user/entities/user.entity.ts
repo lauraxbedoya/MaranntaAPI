@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from 'src/api/order/entities/order.entity';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -29,4 +30,7 @@ export class User extends BaseEntity {
 
   @Column({ name: 'is_admin' })
   public isAdmin: boolean;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[]
 }

@@ -7,3 +7,12 @@ export enum Sizes {
   L = 'l',
   U = 'u'
 }
+
+export enum Categories {
+  BodiesEncaje = 'B/E',
+  OtrosBodies = 'O/B',
+  CropTops = 'C/T',
+  PielDurazno = 'P/D',
+  VestidosBaño = 'V/B',
+  Otros = 'Indefinido'
+}

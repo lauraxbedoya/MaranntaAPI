@@ -27,16 +27,6 @@ export class UserService {
   }
 
   create(body: any) {
-
-    // user.name = body.name;
-    // user.lastname = body.lastname;
-    // user.email = body.email;
-    // user.password = body.password;
-    // user.city = body.city;
-    // user.address = body.address;
-    // user.dateOfBirth = body.dateOfBirth;
-    // user.isAdmin = body.isAdmin;
-
     return this.usersRepo.save(body);
   }
 
@@ -44,5 +34,10 @@ export class UserService {
     const user = await this.usersRepo.findOneBy({ id });
     this.usersRepo.merge(user, body);
     return this.usersRepo.save(user);
+  }
+
+  createOrder(body: any) {
+    const user = this.usersRepo.create(body);
+    return this.usersRepo.save(user)
   }
 }
