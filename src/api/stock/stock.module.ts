@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { StockController } from './controllers/stock.controller';
 import { StockImagesController } from './controllers/stock_image.controller';
 import { Stock } from './entities/stock.entity';
@@ -11,6 +12,6 @@ import { StockImagesService } from './services/stock_image.service';
   imports: [
     TypeOrmModule.forFeature([Stock, StockImage])],
   controllers: [StockController, StockImagesController],
-  providers: [StockService, StockImagesService]
+  providers: [StockService, StockImagesService, CloudinaryService]
 })
 export class StockModule { }

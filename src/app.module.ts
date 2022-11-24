@@ -12,10 +12,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ContactsModule } from './api/contacts/contacts.module';
 import { Contact } from './api/contacts/entities/contacts.entity';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { CloudinaryService } from './cloudinary/cloudinary.service';
 
 @Module({
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -31,7 +33,8 @@ import { Contact } from './api/contacts/entities/contacts.entity';
     AuthModule,
     StockModule,
     OrderModule,
-    ContactsModule
+    ContactsModule,
+    CloudinaryModule
   ],
 })
 export class AppModule { }
