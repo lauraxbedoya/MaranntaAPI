@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { UserService } from '../services/user.service';
+import { CreateUserAdminDto, CreateUserDto } from '../user.dto';
+import { UserRole } from '../user.enum';
 
 @Controller('api/users')
 export class UserController {
@@ -25,9 +27,14 @@ export class UserController {
     return this.userService.remove(id)
   }
 
+  @Post('admin')
+  createUserAdmin(@Body() body: CreateUserAdminDto) {
+    return this.userService.createUserAdmin({ ...body, role: UserRole.Admin });
+  }
+
   @Post()
-  create(@Body() body: any) {
-    return this.userService.create(body);
+  create(@Body() body: CreateUserDto) {
+    return this.userService.create({ ...body, role: UserRole.Customer });
   }
 
   @Put(':id')

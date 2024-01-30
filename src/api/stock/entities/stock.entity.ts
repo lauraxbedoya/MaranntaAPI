@@ -7,38 +7,35 @@ import { StockImage } from './stock_image.entity';
 export class Stock extends BaseEntity {
 
   @PrimaryGeneratedColumn('increment')
-  public id: number;
+  id: number;
 
-  @Column()
-  public style: string;
+  @Column({ type: 'enum', enum: Categories, nullable: false })
+  categories: Categories;
 
-  @Column()
-  public reference: string;
+  @Column({ type: 'varchar', nullable: false })
+  reference: string;
 
-  @Column()
-  public color: string;
+  @Column({ type: 'varchar' })
+  color: string;
 
   @Column({
     type: 'enum',
     enum: Sizes,
     default: Sizes.U
   })
-  public size: Sizes;
+  size: Sizes;
 
-  @Column({ name: 'breast_size' })
-  public breastsize: number;
+  @Column({ name: 'breast_size', type: 'varchar' })
+  breastsize: string;
 
-  @Column()
-  public quantity: number;
+  @Column({ type: 'integer', nullable: false })
+  quantity: number;
 
-  @Column()
-  public price: number;
+  @Column({ type: 'integer', nullable: false })
+  price: number;
 
-  @Column({ type: 'enum', enum: Categories, default: Categories.Otros })
-  public categories: Categories;
-
-  @CreateDateColumn({ nullable: true })
-  createdDate: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
   @OneToMany(() => StockImage, (image) => image.stock)
   stockImages: StockImage[]

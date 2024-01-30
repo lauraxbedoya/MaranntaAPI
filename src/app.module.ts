@@ -10,6 +10,7 @@ import { User } from './api/user/entities/user.entity';
 import { UsersModule } from './api/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigService, ConfigModule } from '@nestjs/config';
 import { ContactsModule } from './api/contacts/contacts.module';
 import { Contact } from './api/contacts/entities/contacts.entity';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
@@ -19,15 +20,23 @@ import { CloudinaryService } from './cloudinary/cloudinary.service';
   controllers: [AppController],
   providers: [AppService, CloudinaryService],
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 4321,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'marannta_api',
-      entities: [User, Stock, StockImage, Order, Contact],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: async (config: ConfigService) => {
+        return {
+          type: 'postgres',
+          host: config.get('DB_HOST'),
+          port: +config.get('DB_PORT'),
+          username: config.get('DB_USERNAME'),
+          password: config.get('DB_PASSWORD'),
+          database: config.get('DB_NAME'),
+          entities: [User, Stock, StockImage, Order, Contact],
+          synchronize: true,
+        }
+      },
+      inject: [ConfigService],
     }),
     UsersModule,
     AuthModule,

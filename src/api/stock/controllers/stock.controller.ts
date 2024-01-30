@@ -1,11 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { StockService } from '../services/stock.service';
+import { CreateProductDto } from '../stock.dto';
 
 @Controller('stock')
 export class StockController {
   constructor(
-    private stockService: StockService
+    private stockService: StockService,
   ) { }
+
+  @Post(':id')
+  @UseInterceptors(FileInterceptor('file'))
+  addImage(@Param('id', ParseIntPipe) id: number, @UploadedFile() file: Express.Multer.File) {
+    return this.stockService.addStockImage(id, file);
+  }
 
   @Get()
   findAll() {
@@ -18,7 +26,7 @@ export class StockController {
   }
 
   @Post()
-  create(@Body() body: any) {
+  create(@Body() body: CreateProductDto) {
     return this.stockService.create(body)
   }
 

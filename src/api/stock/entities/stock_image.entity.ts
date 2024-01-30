@@ -8,9 +8,12 @@ export class StockImage {
   public id: number;
 
   @Column({ nullable: false })
-  public url: string
+  public url: string;
+
+  @Column()
+  stockId: number;
 
   @ManyToOne(() => Stock, (stock) => stock.stockImages)
   @JoinColumn({ name: 'stockId' })
-  stock: Stock
+  stock: Stock;
 }

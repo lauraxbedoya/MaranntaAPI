@@ -1,35 +1,33 @@
 import { Order } from 'src/api/order/entities/order.entity';
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRole } from '../user.enum';
 
 @Entity('users')
 export class User extends BaseEntity {
 
   @PrimaryGeneratedColumn('increment')
-  public id: number;
+  id: number;
 
-  @Column()
-  public name: string;
+  @Column({ type: 'varchar' })
+  name: string;
 
-  @Column()
-  public lastname: string;
+  @Column({ type: 'varchar' })
+  lastName: string;
 
-  @Column({ unique: true })
-  public email: string;
+  @Column({ unique: true, type: 'varchar' })
+  email: string;
 
-  @Column()
-  public password: string;
+  @Column({ type: 'varchar', nullable: true })
+  password: string;
 
-  @Column({ nullable: true })
-  public city: string | null;
+  @Column({ enum: UserRole, default: UserRole.Customer })
+  role: UserRole;
 
-  @Column({ nullable: true })
-  public address: string | null;
+  @Column({ type: 'varchar', nullable: true })
+  birthdate: Date;
 
-  @Column({ name: 'date_of_birth', nullable: true })
-  public dateOfBirth: Date | null;
-
-  @Column({ name: 'is_admin' })
-  public isAdmin: boolean;
+  @CreateDateColumn()
+  createdAt: Date;
 
   @OneToMany(() => Order, (order) => order.user)
   orders: Order[]

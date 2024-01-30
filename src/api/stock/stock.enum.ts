@@ -14,5 +14,5 @@ export enum Categories {
   CropTops = 'C/T',
   PielDurazno = 'P/D',
   VestidosBaño = 'V/B',
-  Otros = 'Indefinido'
+  Otro = 'Otro'
 }
